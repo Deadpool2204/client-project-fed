@@ -1,0 +1,126 @@
+/**
+ * LOGIXPRESS ENTERPRISE SHIPPING RATE CALCULATOR
+ * Responsive Layouts & Print Quotation Stylesheet
+ */
+
+/* Responsive Adjustments for Mobile & Tablets */
+@media (max-width: 991.98px) {
+  .calculator-card {
+    padding: 1.25rem;
+  }
+
+  .service-selector-card {
+    flex-wrap: wrap;
+  }
+
+  .service-selector-btn {
+    flex: 1 1 calc(50% - 6px);
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .service-selector-btn {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+
+  .results-summary-container {
+    padding: 0.75rem;
+  }
+
+  .summary-pill {
+    padding: 6px 8px;
+  }
+
+  .summary-pill .pill-value {
+    font-size: 0.85rem;
+  }
+
+  .scenario-bar {
+    font-size: 0.75rem;
+  }
+}
+
+
+/* =========================================================================
+ * PRINT STYLESHEET (Clean Freight Quotation Memo)
+ * ========================================================================= */
+@media print {
+  /* Hide interactive/chrome elements */
+  .enterprise-navbar,
+  .service-selector-card,
+  .calculator-card,
+  .scenario-bar,
+  .table-toolbar,
+  .chart-card,
+  .enterprise-footer,
+  .btn,
+  .offcanvas,
+  .modal,
+  .toast-container,
+  #btn-swap-locations,
+  .faq-section {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+  }
+
+  #shipping-results-container {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Insert Printable Memo Header */
+  #shipping-results-container::before {
+    content: "LOGIXPRESS ENTERPRISE LOGISTICS — OFFICIAL FREIGHT RATE ESTIMATE";
+    display: block;
+    font-size: 16pt;
+    font-weight: bold;
+    border-bottom: 2pt solid #000;
+    padding-bottom: 8pt;
+    margin-bottom: 12pt;
+    text-transform: uppercase;
+  }
+
+  .results-summary-container {
+    border: 1pt solid #ccc !important;
+    box-shadow: none !important;
+    margin-bottom: 15pt !important;
+  }
+
+  .results-table-card {
+    border: 1pt solid #000 !important;
+    box-shadow: none !important;
+  }
+
+  .enterprise-table {
+    font-size: 10pt !important;
+  }
+
+  .enterprise-table th,
+  .enterprise-table td {
+    border-color: #000 !important;
+    padding: 6pt 8pt !important;
+  }
+
+  .table-highlight-row {
+    background-color: transparent !important;
+  }
+
+  /* Print Notice */
+  .results-legal-notice {
+    font-size: 8pt !important;
+    color: #444 !important;
+    margin-top: 15pt !important;
+    border-top: 1pt solid #ccc !important;
+    padding-top: 8pt !important;
+  }
+}

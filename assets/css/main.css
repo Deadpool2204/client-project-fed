@@ -1,0 +1,356 @@
+/**
+ * LOGIXPRESS ENTERPRISE SHIPPING RATE CALCULATOR
+ * Main Design System & Enterprise Theme
+ * 
+ * Built with an 8px grid system, professional B2B typography,
+ * restrained navy palette, and accessible form controls.
+ */
+
+:root {
+  /* Color Palette */
+  --logi-navy-900: #0f172a;
+  --logi-navy-800: #1e293b;
+  --logi-slate-700: #334155;
+  --logi-slate-600: #475569;
+  --logi-slate-500: #64748b;
+  --logi-slate-400: #94a3b8;
+  --logi-slate-300: #cbd5e1;
+  --logi-slate-200: #e2e8f0;
+  --logi-slate-100: #f1f5f9;
+  --logi-slate-50: #f8fafc;
+  --logi-white: #ffffff;
+
+  /* Primary Brand */
+  --logi-primary: #1e40af;       /* Classic Deep Blue */
+  --logi-primary-hover: #1d4ed8;
+  --logi-primary-active: #1e3a8a;
+  --logi-primary-subtle: #eff6ff;
+
+  /* Accent & Status */
+  --logi-accent: #0284c7;        /* Sky Blue */
+  --logi-success: #059669;       /* Emerald */
+  --logi-success-subtle: #ecfdf5;
+  --logi-warning: #d97706;       /* Amber */
+  --logi-warning-subtle: #fffbeb;
+  --logi-danger: #dc2626;        /* Red */
+  --logi-danger-subtle: #fef2f2;
+  --logi-purple: #7c3aed;
+
+  /* Spacing Grid (8px baseline) */
+  --logi-space-1: 4px;
+  --logi-space-2: 8px;
+  --logi-space-3: 16px;
+  --logi-space-4: 24px;
+  --logi-space-5: 32px;
+  --logi-space-6: 48px;
+
+  /* Radius & Shadows */
+  --logi-radius-sm: 4px;
+  --logi-radius-md: 6px;
+  --logi-radius-lg: 8px;
+  --logi-shadow-subtle: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --logi-shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --logi-shadow-focus: 0 0 0 3px rgba(30, 64, 175, 0.15);
+
+  /* Typography */
+  --logi-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --logi-font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Base resets & typography */
+html, body {
+  font-family: var(--logi-font-family);
+  background-color: var(--logi-slate-50);
+  color: var(--logi-navy-800);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--logi-navy-900);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.font-monospace {
+  font-family: var(--logi-font-mono) !important;
+}
+
+.extra-small {
+  font-size: 0.75rem;
+}
+
+/* Brand Navbar */
+.enterprise-navbar {
+  background-color: var(--logi-white);
+  border-bottom: 1px solid var(--logi-slate-200);
+  box-shadow: var(--logi-shadow-subtle);
+  padding: 0.75rem 0;
+}
+
+.navbar-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--logi-navy-900);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-icon-box {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--logi-primary), #2563eb);
+  color: #fff;
+  border-radius: var(--logi-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.brand-badge {
+  font-size: 0.65rem;
+  background-color: var(--logi-slate-100);
+  color: var(--logi-slate-600);
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-left: 6px;
+  border: 1px solid var(--logi-slate-200);
+}
+
+.enterprise-navbar .nav-link {
+  color: var(--logi-slate-700);
+  font-weight: 500;
+  font-size: 0.925rem;
+  padding: 0.5rem 0.85rem;
+  transition: color 0.15s ease-in-out;
+}
+
+.enterprise-navbar .nav-link:hover,
+.enterprise-navbar .nav-link.active {
+  color: var(--logi-primary);
+}
+
+/* Service Selector Tabs */
+.service-selector-card {
+  background: var(--logi-white);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-lg);
+  padding: 6px;
+  box-shadow: var(--logi-shadow-subtle);
+  display: flex;
+  gap: 6px;
+}
+
+.service-selector-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--logi-radius-md);
+  font-weight: 600;
+  font-size: 0.925rem;
+  color: var(--logi-slate-700);
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.service-selector-btn:hover {
+  background-color: var(--logi-slate-100);
+  color: var(--logi-navy-900);
+}
+
+.service-selector-btn.active {
+  background-color: var(--logi-primary);
+  color: var(--logi-white);
+  box-shadow: 0 1px 2px rgba(30, 64, 175, 0.2);
+}
+
+.service-selector-btn i {
+  font-size: 1.1rem;
+}
+
+/* Form Container Card */
+.calculator-card {
+  background: var(--logi-white);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-lg);
+  box-shadow: var(--logi-shadow-card);
+  padding: 2rem;
+}
+
+.section-legend {
+  font-size: 0.825rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--logi-slate-500);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-legend::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--logi-slate-200);
+}
+
+/* Form Controls */
+.form-label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--logi-navy-800);
+  margin-bottom: 0.35rem;
+}
+
+.form-control,
+.form-select {
+  border: 1px solid var(--logi-slate-300);
+  border-radius: var(--logi-radius-md);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--logi-navy-900);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--logi-primary);
+  box-shadow: var(--logi-shadow-focus);
+}
+
+.form-control::placeholder {
+  color: var(--logi-slate-400);
+  font-size: 0.85rem;
+}
+
+.input-group-text {
+  background-color: var(--logi-slate-100);
+  border-color: var(--logi-slate-300);
+  color: var(--logi-slate-600);
+  font-size: 0.85rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--logi-primary);
+  border-color: var(--logi-primary);
+  font-weight: 600;
+  border-radius: var(--logi-radius-md);
+  padding: 0.6rem 1.25rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--logi-primary-hover);
+  border-color: var(--logi-primary-hover);
+}
+
+.btn-outline-primary {
+  color: var(--logi-primary);
+  border-color: var(--logi-primary);
+  font-weight: 500;
+  border-radius: var(--logi-radius-md);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--logi-primary);
+  color: #fff;
+}
+
+/* Swap button */
+.btn-swap {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--logi-slate-300);
+  background: var(--logi-white);
+  color: var(--logi-slate-700);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-swap:hover {
+  background: var(--logi-slate-100);
+  color: var(--logi-primary);
+  border-color: var(--logi-primary);
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Scenario Quick Bar */
+.scenario-bar {
+  background: var(--logi-slate-100);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-md);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.scenario-chip {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--logi-white);
+  border: 1px solid var(--logi-slate-300);
+  border-radius: 14px;
+  padding: 3px 10px;
+  color: var(--logi-slate-700);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.scenario-chip:hover {
+  background: var(--logi-primary-subtle);
+  border-color: var(--logi-primary);
+  color: var(--logi-primary);
+}
+
+/* Footer */
+.enterprise-footer {
+  background-color: var(--logi-white);
+  border-top: 1px solid var(--logi-slate-200);
+  padding: 3rem 0 1.5rem;
+  color: var(--logi-slate-600);
+  font-size: 0.875rem;
+}
+
+.enterprise-footer h6 {
+  color: var(--logi-navy-900);
+  font-size: 0.925rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.enterprise-footer a {
+  color: var(--logi-slate-600);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.enterprise-footer a:hover {
+  color: var(--logi-primary);
+}

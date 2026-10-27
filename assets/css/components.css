@@ -1,0 +1,559 @@
+/**
+ * LOGIXPRESS ENTERPRISE SHIPPING RATE CALCULATOR
+ * Component Stylesheet
+ * 
+ * Specialized styles for comparison tables, live calculation badges,
+ * Chart.js wrappers, modals, and history drawer.
+ */
+
+/* Live Preview Metric Pills */
+.live-preview-box {
+  background-color: var(--logi-slate-50);
+  border: 1px dashed var(--logi-slate-300);
+  border-radius: var(--logi-radius-md);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.metric-pill {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-pill-label {
+  font-size: 0.725rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--logi-slate-500);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.metric-pill-val {
+  font-family: var(--logi-font-mono);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--logi-navy-900);
+}
+
+.metric-pill-val.highlight {
+  color: var(--logi-primary);
+}
+
+/* Results Section Summary Bar */
+.results-summary-container {
+  background-color: var(--logi-white);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-lg);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--logi-shadow-subtle);
+  margin-bottom: 1.5rem;
+}
+
+.summary-pill {
+  background-color: var(--logi-slate-50);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-md);
+  padding: 8px 12px;
+  height: 100%;
+}
+
+.summary-pill.highlight {
+  background-color: var(--logi-primary-subtle);
+  border-color: #bfdbfe;
+}
+
+.summary-pill .pill-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--logi-slate-500);
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.summary-pill .pill-value {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--logi-navy-900);
+}
+
+/* Rate Comparison Table */
+.results-table-card {
+  background-color: var(--logi-white);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-lg);
+  box-shadow: var(--logi-shadow-card);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.table-toolbar {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--logi-slate-200);
+  background-color: var(--logi-slate-50);
+}
+
+.enterprise-table {
+  width: 100%;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+}
+
+.enterprise-table thead th {
+  background-color: var(--logi-slate-100);
+  color: var(--logi-slate-600);
+  font-weight: 600;
+  font-size: 0.775rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--logi-slate-200);
+  vertical-align: middle;
+}
+
+.enterprise-table tbody td {
+  padding: 1rem 1rem;
+  border-bottom: 1px solid var(--logi-slate-200);
+  vertical-align: middle;
+}
+
+.enterprise-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.enterprise-table tbody tr:hover {
+  background-color: rgba(241, 245, 249, 0.6);
+}
+
+.table-highlight-row {
+  background-color: #f0fdf4 !important;
+}
+
+.service-name-title {
+  font-size: 0.95rem;
+}
+
+/* Charts Card Container */
+.chart-card {
+  background-color: var(--logi-white);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-lg);
+  box-shadow: var(--logi-shadow-card);
+  padding: 1.25rem;
+  height: 100%;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 240px;
+  width: 100%;
+}
+
+/* Hyperlocal Vehicle Cards */
+.vehicle-radio-card {
+  cursor: pointer;
+  border: 1px solid var(--logi-slate-300);
+  border-radius: var(--logi-radius-md);
+  padding: 12px;
+  background-color: var(--logi-white);
+  transition: all 0.15s ease-in-out;
+  height: 100%;
+}
+
+.vehicle-radio-card:hover {
+  border-color: var(--logi-primary);
+  background-color: var(--logi-slate-50);
+}
+
+.vehicle-radio-input:checked + .vehicle-radio-card {
+  border-color: var(--logi-primary);
+  background-color: var(--logi-primary-subtle);
+  box-shadow: 0 0 0 2px var(--logi-primary);
+}
+
+/* Price Breakdown Modal */
+.modal-content {
+  border-radius: var(--logi-radius-lg);
+  border: 1px solid var(--logi-slate-300);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--logi-slate-200);
+  background-color: var(--logi-slate-50);
+}
+
+/* Saved Quote Drawer */
+.saved-quote-item {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.saved-quote-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--logi-shadow-card) !important;
+}
+
+/* Badges */
+.badge {
+  font-weight: 600;
+  padding: 0.35em 0.65em;
+  border-radius: var(--logi-radius-sm);
+}
+
+.badge-outline-primary {
+  color: var(--logi-primary);
+  border: 1px solid var(--logi-primary);
+  background-color: transparent;
+}
+
+/* =========================================================================
+ * USER-FRIENDLY UI ENHANCEMENTS
+ * ========================================================================= */
+
+/* Quick Package Type & Size Presets */
+.preset-chips-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.preset-chip {
+  background-color: var(--logi-slate-100);
+  border: 1px solid var(--logi-slate-300);
+  color: var(--logi-slate-700);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.825rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  user-select: none;
+}
+
+.preset-chip:hover {
+  background-color: #e2e8f0;
+  border-color: var(--logi-primary);
+  color: var(--logi-primary);
+  transform: translateY(-1px);
+}
+
+.preset-chip.active {
+  background-color: #eff6ff;
+  border-color: var(--logi-primary);
+  color: var(--logi-primary);
+  font-weight: 600;
+  box-shadow: 0 0 0 1px var(--logi-primary);
+}
+
+.preset-chip-sub {
+  font-size: 0.725rem;
+  color: var(--logi-slate-500);
+}
+
+.preset-chip.active .preset-chip-sub {
+  color: var(--logi-primary);
+}
+
+/* Quick City Suggestion Chips */
+.city-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.city-chip-btn {
+  background: transparent;
+  border: 1px solid var(--logi-slate-200);
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  color: var(--logi-slate-600);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.3;
+}
+
+.city-chip-btn:hover {
+  background-color: var(--logi-slate-100);
+  border-color: var(--logi-primary);
+  color: var(--logi-primary);
+}
+
+/* Live Friendly Weight Guidance Box */
+.friendly-weight-box {
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #cbd5e1;
+  border-radius: var(--logi-radius-lg);
+  padding: 14px 18px;
+  margin-bottom: 1.5rem;
+}
+
+.weight-metric-pill {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--logi-radius-md);
+  padding: 8px 14px;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.weight-metric-pill.highlight {
+  border-color: #93c5fd;
+  background-color: #eff6ff;
+}
+
+.weight-metric-pill .w-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--logi-slate-600);
+  margin-bottom: 2px;
+}
+
+.weight-metric-pill .w-val {
+  font-family: var(--logi-font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--logi-navy-900);
+}
+
+.weight-metric-pill.highlight .w-val {
+  color: var(--logi-primary);
+}
+
+.weight-explainer-note {
+  font-size: 0.825rem;
+  color: var(--logi-slate-700);
+  background-color: #ffffff;
+  border-left: 3px solid var(--logi-primary);
+  padding: 8px 12px;
+  border-radius: 0 var(--logi-radius-sm) var(--logi-radius-sm) 0;
+  margin-top: 10px;
+}
+
+/* Friendly Journey Summary Card */
+.journey-summary-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--logi-shadow-card);
+  margin-bottom: 1.5rem;
+}
+
+.journey-route-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--logi-slate-200);
+  margin-bottom: 12px;
+}
+
+.journey-location-tag {
+  background-color: var(--logi-white);
+  border: 1px solid var(--logi-slate-300);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--logi-navy-900);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.journey-arrow-divider {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--logi-primary);
+  font-size: 1.1rem;
+}
+
+.journey-meta-badge {
+  background-color: var(--logi-slate-100);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-md);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  color: var(--logi-slate-700);
+  text-align: center;
+}
+
+.journey-meta-badge strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--logi-navy-900);
+}
+
+/* Courier Option Cards Grid */
+.courier-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.courier-card {
+  background-color: var(--logi-white);
+  border: 1px solid var(--logi-slate-200);
+  border-radius: var(--logi-radius-lg);
+  box-shadow: var(--logi-shadow-card);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+.courier-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  border-color: #93c5fd;
+}
+
+.courier-card.is-cheapest {
+  border-color: #10b981;
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 60px);
+}
+
+.courier-card.is-fastest {
+  border-color: #3b82f6;
+  background: linear-gradient(180deg, #eff6ff 0%, #ffffff 60px);
+}
+
+.courier-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.courier-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--logi-navy-900);
+  margin-bottom: 2px;
+}
+
+.courier-mode-badge {
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background-color: var(--logi-slate-100);
+  color: var(--logi-slate-700);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.courier-delivery-time {
+  background-color: var(--logi-slate-50);
+  border-radius: var(--logi-radius-md);
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border: 1px solid var(--logi-slate-100);
+}
+
+.courier-delivery-days {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--logi-navy-900);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.courier-delivery-date {
+  font-size: 0.775rem;
+  color: var(--logi-slate-500);
+  margin-top: 2px;
+}
+
+.courier-price-area {
+  padding-top: 10px;
+  border-top: 1px dashed var(--logi-slate-200);
+  margin-bottom: 14px;
+}
+
+.courier-price-label {
+  font-size: 0.725rem;
+  color: var(--logi-slate-500);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+}
+
+.courier-price-amount {
+  font-family: var(--logi-font-mono);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--logi-navy-900);
+  line-height: 1.2;
+}
+
+.courier-price-subtext {
+  font-size: 0.725rem;
+  color: #059669;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.courier-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* View Mode Switcher (Cards vs Table) */
+.view-mode-toggle {
+  display: inline-flex;
+  background-color: var(--logi-slate-200);
+  border-radius: var(--logi-radius-md);
+  padding: 2px;
+}
+
+.view-mode-btn {
+  border: none;
+  background: transparent;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--logi-slate-600);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.view-mode-btn.active {
+  background-color: var(--logi-white);
+  color: var(--logi-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+

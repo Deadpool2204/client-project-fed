@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargo &amp; Bulk Heavy Freight Calculator — LogiXpress</title>
+  <meta name="description" content="Commercial LTL, FTL, and heavy cargo rate calculator with multi-pallet manifest builder, CBM volume calculation, and equipment add-ons.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <link href="assets/css/main.css?v=2" rel="stylesheet">
+  <link href="assets/css/components.css?v=2" rel="stylesheet">
+  <link href="assets/css/responsive.css?v=2" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg enterprise-navbar sticky-top">
+      <div class="container">
+        <a class="navbar-brand-logo" href="index.html">
+          <div class="brand-icon-box"><i class="bi bi-box-seam-fill"></i></div>
+          <div class="d-flex flex-column">
+            <span class="lh-1">LogiXpress</span>
+            <span class="brand-badge">Heavy Freight &amp; LTL</span>
+          </div>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#enterpriseNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="enterpriseNav">
+          <ul class="navbar-nav me-auto ms-lg-4 mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="index.html">All Calculators</a></li>
+            <li class="nav-item"><a class="nav-link" href="domestic.html">Domestic Shipping</a></li>
+            <li class="nav-item"><a class="nav-link" href="international.html">International Shipping</a></li>
+            <li class="nav-item"><a class="nav-link active" href="cargo.html">Cargo &amp; Bulk</a></li>
+            <li class="nav-item"><a class="nav-link" href="quick-delivery.html">Quick Delivery</a></li>
+            <li class="nav-item"><a class="nav-link" href="faq.html">Help / FAQ</a></li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-outline-secondary btn-sm position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#savedQuotesOffcanvas">
+              <i class="bi bi-bookmark me-1"></i> Saved Quotes
+              <span class="saved-quotes-badge badge bg-primary position-absolute top-0 start-100 translate-middle rounded-pill" style="display: none;">0</span>
+            </button>
+            <a href="tests.html" class="btn btn-outline-success btn-sm">
+              <i class="bi bi-patch-check me-1"></i> Test Suite
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container py-4">
+    <div class="text-center mb-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center small">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Cargo &amp; Bulk</li>
+        </ol>
+      </nav>
+      <h1 class="display-6 fw-bold text-dark mb-2">Commercial Cargo &amp; Bulk Freight Calculator</h1>
+      <p class="text-secondary lead fs-6 mx-auto" style="max-width: 680px;">
+        Designed for B2B supply chains, industrial parts, palletized loads, and part-truckload (LTL) logistics.
+      </p>
+    </div>
+
+    <!-- Cargo Form Card -->
+    <section class="calculator-card mx-auto mb-4" style="max-width: 960px;">
+      <form id="form-cargo" novalidate>
+        
+        <div class="section-legend">
+          <i class="bi bi-pin-map"></i> 1. Cargo Pickup &amp; Delivery Locations
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label for="cargo-pickup-pin" class="form-label">Pickup Pincode / Facility <span class="text-danger">*</span></label>
+            <input type="text" id="cargo-pickup-pin" class="form-control font-monospace" placeholder="e.g. 400099" maxlength="6" value="400099" required>
+          </div>
+          <div class="col-md-6">
+            <label for="cargo-delivery-pin" class="form-label">Delivery Pincode / Facility <span class="text-danger">*</span></label>
+            <input type="text" id="cargo-delivery-pin" class="form-control font-monospace" placeholder="e.g. 560100" maxlength="6" value="560100" required>
+          </div>
+        </div>
+
+        <div class="section-legend d-flex justify-content-between align-items-center">
+          <span><i class="bi bi-boxes"></i> 2. Packages &amp; Pallets</span>
+          <button type="button" id="btn-add-cargo-row" class="btn btn-sm btn-outline-primary">
+            <i class="bi bi-plus-lg me-1"></i> Add Another Row
+          </button>
+        </div>
+
+        <div class="table-responsive mb-3 border rounded">
+          <table class="table table-sm align-middle mb-0" id="cargo-packages-table">
+            <thead class="table-light">
+              <tr>
+                <th style="min-width: 170px;">Package Type</th>
+                <th style="width: 80px;" class="text-center">Count</th>
+                <th style="min-width: 220px;" class="text-center">Box Size (L &times; W &times; H cm)</th>
+                <th style="width: 130px;" class="text-end">Weight / Item</th>
+                <th style="width: 50px;" class="text-center">Remove</th>
+              </tr>
+            </thead>
+            <tbody id="cargo-packages-tbody">
+              <!-- Injected via calculator.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Live Cargo Manifest Summary -->
+        <div class="friendly-weight-box mb-4">
+          <div class="row g-2 align-items-center">
+            <div class="col-3">
+              <div class="weight-metric-pill">
+                <span class="w-label">Total Items</span>
+                <span class="w-val" id="cargo-preview-pieces">0</span>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="weight-metric-pill">
+                <span class="w-label">Scale Weight</span>
+                <span class="w-val" id="cargo-preview-actual">0.00 kg</span>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="weight-metric-pill">
+                <span class="w-label">Space Volume</span>
+                <span class="w-val" id="cargo-preview-cbm">0.000 m&sup3;</span>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="weight-metric-pill highlight">
+                <span class="w-label">Billed Weight</span>
+                <span class="w-val highlight" id="cargo-preview-chargeable">0.00 kg</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-legend">
+          <i class="bi bi-gear"></i> 3. Extra Handling &amp; Equipment
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="cargo-tail-lift" checked>
+              <label class="form-check-label text-dark small" for="cargo-tail-lift">
+                Truck Tail-Lift (+&#8377;500)
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="cargo-inside-delivery">
+              <label class="form-check-label text-dark small" for="cargo-inside-delivery">
+                Inside Delivery (+&#8377;750)
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="cargo-forklift">
+              <label class="form-check-label text-dark small" for="cargo-forklift">
+                Forklift Service (+&#8377;1,200)
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="cargo-dock-appointment">
+              <label class="form-check-label text-dark small" for="cargo-dock-appointment">
+                Dock Appointment (+&#8377;350)
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <label for="cargo-declared-value" class="form-label">Total Cargo Value (INR)</label>
+            <div class="input-group">
+              <span class="input-group-text">&#8377;</span>
+              <input type="number" id="cargo-declared-value" class="form-control font-monospace" placeholder="75000" min="0" value="85000">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+          <button type="button" id="btn-reset-cargo" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Clear Form
+          </button>
+          <button type="submit" id="btn-calculate-cargo" class="btn btn-primary px-4">
+            <i class="bi bi-search me-1"></i> Find Cargo Rates
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- Results Section -->
+    <div id="shipping-results-container" class="mx-auto mb-5 d-none" style="max-width: 960px;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h4 class="fw-bold text-dark mb-0">Commercial Freight Estimates</h4>
+          <span class="text-secondary small" id="results-count-badge">Available Services</span>
+        </div>
+        <div class="d-flex gap-2">
+          <button type="button" id="btn-copy-quote" class="btn btn-sm btn-outline-secondary"><i class="bi bi-clipboard me-1"></i> Copy</button>
+          <button type="button" id="btn-export-csv" class="btn btn-sm btn-outline-secondary"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Export CSV</button>
+          <button type="button" id="btn-print-quote" class="btn btn-sm btn-outline-primary"><i class="bi bi-printer me-1"></i> Print Memo</button>
+        </div>
+      </div>
+
+      <!-- Route & Metrics Summary Bar -->
+      <div id="results-summary-bar" class="p-0 border-0 bg-transparent shadow-none mb-3">
+        <!-- Injected via results.js -->
+      </div>
+
+      <div class="results-table-card">
+        <div class="table-toolbar">
+          <div class="row g-2 align-items-center">
+            <!-- View Mode Switcher -->
+            <div class="col-sm-12 col-md-3">
+              <div class="view-mode-toggle" role="group" aria-label="Result View Mode">
+                <button type="button" class="view-mode-btn active" id="btn-view-cards" title="Show easy-to-read courier cards">
+                  <i class="bi bi-grid-fill"></i> Cards View
+                </button>
+                <button type="button" class="view-mode-btn" id="btn-view-table" title="Show detailed spreadsheet table">
+                  <i class="bi bi-table"></i> Table View
+                </button>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text"><i class="bi bi-sort-down"></i> Sort</span>
+                <select id="select-sort-results" class="form-select">
+                  <option value="price-asc" selected>Lowest Price (Cheapest)</option>
+                  <option value="time-asc">Fastest Delivery</option>
+                  <option value="name-asc">Service Name (A - Z)</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text"><i class="bi bi-funnel"></i> Mode</span>
+                <select id="select-filter-mode" class="form-select">
+                  <option value="all" selected>All Modes</option>
+                  <option value="surface">Surface Road</option>
+                  <option value="air">Commercial Air Cargo</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-2 text-end ms-auto">
+              <button type="button" id="btn-reset-filters" class="btn btn-sm btn-outline-secondary w-100">
+                <i class="bi bi-x-circle me-1"></i> Reset
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards View (Default, User-Friendly) -->
+        <div id="results-cards-container">
+          <!-- Injected via results.js -->
+        </div>
+
+        <div class="table-responsive d-none" id="results-table-container">
+          <table class="enterprise-table">
+            <thead>
+              <tr>
+                <th style="min-width: 220px;">Carrier Service</th>
+                <th style="width: 150px;">Mode</th>
+                <th style="width: 110px;" class="text-center">Billable Wt</th>
+                <th style="width: 170px;">Estimated Transit</th>
+                <th style="width: 110px;" class="text-end">Base Freight</th>
+                <th style="width: 110px;" class="text-end">Taxes (GST)</th>
+                <th style="width: 140px;" class="text-end">Final Estimate</th>
+                <th style="width: 120px;" class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="results-table-body"></tbody>
+          </table>
+        </div>
+
+        <div id="results-cards-mobile" class="p-3"></div>
+        <div id="results-empty-state" class="d-none"></div>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-7">
+          <div class="chart-card">
+            <h6 class="fw-bold text-dark mb-1"><i class="bi bi-bar-chart-fill text-primary me-1"></i> Cost Breakdown Chart</h6>
+            <div class="chart-wrapper"><canvas id="chart-cost-breakdown"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="chart-card">
+            <h6 class="fw-bold text-dark mb-1"><i class="bi bi-pie-chart-fill text-accent me-1"></i> Weight Comparison Chart</h6>
+            <div class="chart-wrapper"><canvas id="chart-weight-comparison"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal fade" id="priceBreakdownModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold text-dark" id="modal-service-title">Shipping Price Breakdown</h5>
+            <span class="text-secondary small" id="modal-service-subtitle"></span>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="modal-body p-4" id="modal-breakdown-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="savedQuotesOffcanvas">
+    <div class="offcanvas-header border-bottom bg-light">
+      <h5 class="offcanvas-title fw-bold text-dark"><i class="bi bi-bookmarks text-primary me-2"></i> Saved Estimates</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body p-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-secondary extra-small text-uppercase fw-semibold">Local Storage History</span>
+        <button type="button" id="btn-clear-saved-quotes" class="btn btn-link btn-sm text-danger text-decoration-none p-0">Clear All</button>
+      </div>
+      <div id="saved-quotes-list"></div>
+    </div>
+  </div>
+
+  <footer class="enterprise-footer">
+    <div class="container text-center small text-muted">
+      &copy; 2026 LogiXpress Enterprise Logistics. Commercial freight rules conform to Indian Carriage by Road Rules 2011.
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/config.js?v=2"></script>
+  <script src="assets/js/validation.js?v=2"></script>
+  <script src="assets/js/pricing-engine.js?v=2"></script>
+  <script src="assets/js/storage.js?v=2"></script>
+  <script src="assets/js/export.js?v=2"></script>
+  <script src="assets/js/results.js?v=2"></script>
+  <script src="assets/js/calculator.js?v=2"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      LogiCalculator.init();
+      LogiResults.initControls();
+      LogiStorage.triggerQuoteCountUpdate();
+      setTimeout(() => {
+        document.getElementById('btn-calculate-cargo').click();
+      }, 200);
+    });
+  </script>
+</body>
+</html>

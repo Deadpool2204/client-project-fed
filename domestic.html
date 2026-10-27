@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domestic Courier & Parcel Shipping Calculator — LogiXpress</title>
+  <meta name="description" content="Calculate domestic shipping rates across India. Fast surface and air courier rate comparison with live volumetric calculation.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <link href="assets/css/main.css?v=2" rel="stylesheet">
+  <link href="assets/css/components.css?v=2" rel="stylesheet">
+  <link href="assets/css/responsive.css?v=2" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg enterprise-navbar sticky-top">
+      <div class="container">
+        <a class="navbar-brand-logo" href="index.html">
+          <div class="brand-icon-box"><i class="bi bi-box-seam-fill"></i></div>
+          <div class="d-flex flex-column">
+            <span class="lh-1">LogiXpress</span>
+            <span class="brand-badge">Domestic Shipping</span>
+          </div>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#enterpriseNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="enterpriseNav">
+          <ul class="navbar-nav me-auto ms-lg-4 mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="index.html">All Calculators</a></li>
+            <li class="nav-item"><a class="nav-link active" href="domestic.html">Domestic Shipping</a></li>
+            <li class="nav-item"><a class="nav-link" href="international.html">International Shipping</a></li>
+            <li class="nav-item"><a class="nav-link" href="cargo.html">Cargo &amp; Bulk</a></li>
+            <li class="nav-item"><a class="nav-link" href="quick-delivery.html">Quick Delivery</a></li>
+            <li class="nav-item"><a class="nav-link" href="faq.html">Help / FAQ</a></li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-outline-secondary btn-sm position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#savedQuotesOffcanvas">
+              <i class="bi bi-bookmark me-1"></i> Saved Quotes
+              <span class="saved-quotes-badge badge bg-primary position-absolute top-0 start-100 translate-middle rounded-pill" style="display: none;">0</span>
+            </button>
+            <a href="tests.html" class="btn btn-outline-success btn-sm">
+              <i class="bi bi-patch-check me-1"></i> Test Suite
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container py-4">
+    <div class="text-center mb-4">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center small">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Domestic Shipping</li>
+        </ol>
+      </nav>
+      <h1 class="display-6 fw-bold text-dark mb-2">Domestic Shipping Rate Calculator</h1>
+      <p class="text-secondary lead fs-6 mx-auto" style="max-width: 680px;">
+        Calculate pan-India courier shipping costs with live pin-code routing, volumetric weight evaluation, and GST breakdown.
+      </p>
+    </div>
+
+    <!-- Domestic Form Card -->
+    <section class="calculator-card mx-auto mb-4" style="max-width: 960px;">
+      <form id="form-domestic" novalidate>
+        
+        <div class="section-legend">
+          <i class="bi bi-geo-alt"></i> 1. Where are you shipping?
+        </div>
+        
+        <div class="row g-3 align-items-center mb-4">
+          <div class="col-md-5">
+            <label for="dom-pickup-pin" class="form-label">Pickup Pincode (From) <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+              <input type="text" id="dom-pickup-pin" class="form-control font-monospace" placeholder="e.g. 400001" maxlength="6" inputmode="numeric" value="400001" required>
+            </div>
+            <div id="dom-pickup-city-info" class="mt-1 small">
+              <span class="badge text-bg-light border text-primary"><i class="bi bi-geo-alt-fill me-1"></i>Fort, Mumbai, Maharashtra</span>
+            </div>
+            <div class="city-chips-row">
+              <span class="extra-small text-muted">Quick:</span>
+              <button type="button" class="city-chip-btn" data-target="dom-pickup-pin" data-pin="400001">Mumbai (400001)</button>
+              <button type="button" class="city-chip-btn" data-target="dom-pickup-pin" data-pin="110001">Delhi (110001)</button>
+              <button type="button" class="city-chip-btn" data-target="dom-pickup-pin" data-pin="560001">Bengaluru (560001)</button>
+            </div>
+          </div>
+
+          <div class="col-md-2 text-center pt-md-3">
+            <button type="button" id="btn-swap-locations" class="btn-swap" title="Swap From and To locations">
+              <i class="bi bi-arrow-left-right"></i>
+            </button>
+          </div>
+
+          <div class="col-md-5">
+            <label for="dom-delivery-pin" class="form-label">Delivery Pincode (To) <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-geo"></i></span>
+              <input type="text" id="dom-delivery-pin" class="form-control font-monospace" placeholder="e.g. 110001" maxlength="6" inputmode="numeric" value="110001" required>
+            </div>
+            <div id="dom-delivery-city-info" class="mt-1 small">
+              <span class="badge text-bg-light border text-primary"><i class="bi bi-geo-alt-fill me-1"></i>New Delhi, Delhi</span>
+            </div>
+            <div class="city-chips-row">
+              <span class="extra-small text-muted">Quick:</span>
+              <button type="button" class="city-chip-btn" data-target="dom-delivery-pin" data-pin="110001">Delhi (110001)</button>
+              <button type="button" class="city-chip-btn" data-target="dom-delivery-pin" data-pin="560001">Bengaluru (560001)</button>
+              <button type="button" class="city-chip-btn" data-target="dom-delivery-pin" data-pin="411001">Pune (411001)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-legend">
+          <i class="bi bi-box"></i> 2. Package Size &amp; Weight
+        </div>
+
+        <!-- Box Presets -->
+        <div class="mb-3">
+          <span class="text-secondary extra-small fw-semibold text-uppercase d-block mb-1">Pick a common box size or enter custom dimensions:</span>
+          <div class="preset-chips-wrapper">
+            <button type="button" class="preset-chip dom-preset-chip" data-preset="envelope">
+              <i class="bi bi-envelope"></i> Document / Envelope <span class="preset-chip-sub">(0.2 kg)</span>
+            </button>
+            <button type="button" class="preset-chip dom-preset-chip" data-preset="small">
+              <i class="bi bi-box"></i> Small Box <span class="preset-chip-sub">(1 kg • Shoes / Phone)</span>
+            </button>
+            <button type="button" class="preset-chip dom-preset-chip active" data-preset="medium">
+              <i class="bi bi-box-seam"></i> Medium Box <span class="preset-chip-sub">(3 kg • Clothes / Laptop)</span>
+            </button>
+            <button type="button" class="preset-chip dom-preset-chip" data-preset="large">
+              <i class="bi bi-boxes"></i> Large Box <span class="preset-chip-sub">(10 kg • Bulk items)</span>
+            </button>
+            <button type="button" class="preset-chip dom-preset-chip" data-preset="custom">
+              <i class="bi bi-pencil"></i> Custom Dimensions
+            </button>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-md-3">
+            <label for="dom-weight" class="form-label">Package Weight (kg) <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <input type="number" id="dom-weight" class="form-control font-monospace text-end" placeholder="3.0" min="0.1" step="0.1" value="3.0" required>
+              <span class="input-group-text">kg</span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Box Size (Length &times; Width &times; Height in cm) <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <input type="number" id="dom-length" class="form-control font-monospace text-center" placeholder="L" min="1" step="0.5" value="35" required>
+              <span class="input-group-text">&times;</span>
+              <input type="number" id="dom-width" class="form-control font-monospace text-center" placeholder="W" min="1" step="0.5" value="25" required>
+              <span class="input-group-text">&times;</span>
+              <input type="number" id="dom-height" class="form-control font-monospace text-center" placeholder="H" min="1" step="0.5" value="15" required>
+              <span class="input-group-text">cm</span>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="dom-packages-count" class="form-label">Number of Boxes</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-boxes"></i></span>
+              <input type="number" id="dom-packages-count" class="form-control font-monospace text-center" value="1" min="1" max="100">
+            </div>
+          </div>
+        </div>
+
+        <!-- Friendly Live Weight Guidance Box -->
+        <div class="friendly-weight-box mb-4">
+          <div class="row g-2 align-items-center">
+            <div class="col-4">
+              <div class="weight-metric-pill">
+                <span class="w-label"><i class="bi bi-speedometer2 me-1"></i>Scale Weight</span>
+                <span class="w-val" id="dom-live-actual">3.00 kg</span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="weight-metric-pill">
+                <span class="w-label"><i class="bi bi-box me-1"></i>Box Space Weight</span>
+                <span class="w-val" id="dom-live-volumetric">2.63 kg</span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="weight-metric-pill highlight">
+                <span class="w-label"><i class="bi bi-tag me-1"></i>Billed Weight</span>
+                <span class="w-val highlight" id="dom-live-chargeable">3.00 kg</span>
+              </div>
+            </div>
+          </div>
+          <div class="weight-explainer-note" id="dom-live-explanation">
+            <i class="bi bi-check-circle me-1 text-success"></i> <strong>Billed by scale weight (3.00 kg):</strong> Your package is compact and dense, so couriers bill for the actual scale weight.
+          </div>
+        </div>
+
+        <div class="section-legend">
+          <i class="bi bi-sliders"></i> 3. Additional Options (Optional)
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <label for="dom-declared-value" class="form-label">Item Value (INR)</label>
+            <div class="input-group">
+              <span class="input-group-text">&#8377;</span>
+              <input type="number" id="dom-declared-value" class="form-control font-monospace" placeholder="3000" min="0" step="100" value="4500">
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label d-block">Payment Option</label>
+            <div class="btn-group w-100" role="group">
+              <input type="radio" class="btn-check" name="dom-payment-mode" id="dom-pay-prepaid" value="prepaid" checked>
+              <label class="btn btn-outline-secondary btn-sm" for="dom-pay-prepaid">
+                <i class="bi bi-credit-card me-1"></i> Prepaid
+              </label>
+
+              <input type="radio" class="btn-check" name="dom-payment-mode" id="dom-pay-cod" value="cod">
+              <label class="btn btn-outline-secondary btn-sm" for="dom-pay-cod">
+                <i class="bi bi-cash-coin me-1"></i> Cash on Delivery
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="dom-transport-mode" class="form-label">Preferred Speed</label>
+            <select id="dom-transport-mode" class="form-select">
+              <option value="any" selected>All Options (Show Best)</option>
+              <option value="surface">Surface (Budget Road)</option>
+              <option value="air">Air Express (Fastest)</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label for="dom-shipment-type" class="form-label">Delivery Direction</label>
+            <select id="dom-shipment-type" class="form-select">
+              <option value="forward" selected>Standard Delivery</option>
+              <option value="rto">Return to Sender</option>
+              <option value="reverse">Customer Return / Exchange Pickup</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="dom-cod-container" class="row g-3 mb-4 d-none">
+          <div class="col-md-6">
+            <div class="p-3 bg-light rounded border border-warning-subtle">
+              <label for="dom-cod-amount" class="form-label fw-semibold text-dark">
+                <i class="bi bi-cash-coin text-warning me-1"></i> Cash to Collect from Customer (INR) <span class="text-danger">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text">&#8377;</span>
+                <input type="number" id="dom-cod-amount" class="form-control font-monospace" placeholder="Enter collection amount" min="1" max="50000">
+              </div>
+              <div class="text-muted extra-small mt-1">
+                COD handling fee: 2.0% (minimum &#8377;45). Maximum COD allowed: &#8377;50,000.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="dom-insurance-check">
+              <label class="form-check-label text-dark" for="dom-insurance-check">
+                Add Package Protection (Insurance)
+                <span class="d-block text-muted extra-small">Protects against loss or damage during transit (0.25% of declared value above &#8377;5,000 free liability).</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+          <button type="button" id="btn-reset-domestic" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-counterclockwise me-1"></i> Clear Form
+          </button>
+          <button type="submit" id="btn-calculate-domestic" class="btn btn-primary px-4">
+            <i class="bi bi-search me-1"></i> Find Shipping Rates
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- Results Section -->
+    <div id="shipping-results-container" class="mx-auto mb-5 d-none" style="max-width: 960px;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h4 class="fw-bold text-dark mb-0">Domestic Rate Estimates</h4>
+          <span class="text-secondary small" id="results-count-badge">Available Services</span>
+        </div>
+        <div class="d-flex gap-2">
+          <button type="button" id="btn-copy-quote" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-clipboard me-1"></i> Copy
+          </button>
+          <button type="button" id="btn-export-csv" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-file-earmark-spreadsheet me-1"></i> Export CSV
+          </button>
+          <button type="button" id="btn-print-quote" class="btn btn-sm btn-outline-primary">
+            <i class="bi bi-printer me-1"></i> Print Memo
+          </button>
+        </div>
+      </div>
+
+      <!-- Route & Metrics Summary Bar -->
+      <div id="results-summary-bar" class="p-0 border-0 bg-transparent shadow-none mb-3">
+        <!-- Injected via results.js -->
+      </div>
+
+      <div class="results-table-card">
+        <div class="table-toolbar">
+          <div class="row g-2 align-items-center">
+            <!-- View Mode Switcher -->
+            <div class="col-sm-12 col-md-3">
+              <div class="view-mode-toggle" role="group" aria-label="Result View Mode">
+                <button type="button" class="view-mode-btn active" id="btn-view-cards" title="Show easy-to-read courier cards">
+                  <i class="bi bi-grid-fill"></i> Cards View
+                </button>
+                <button type="button" class="view-mode-btn" id="btn-view-table" title="Show detailed spreadsheet table">
+                  <i class="bi bi-table"></i> Table View
+                </button>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text"><i class="bi bi-sort-down"></i> Sort</span>
+                <select id="select-sort-results" class="form-select">
+                  <option value="price-asc" selected>Lowest Price (Cheapest)</option>
+                  <option value="time-asc">Fastest Delivery (Transit)</option>
+                  <option value="name-asc">Service Name (A - Z)</option>
+                  <option value="price-desc">Highest Price</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-2">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text"><i class="bi bi-funnel"></i> Mode</span>
+                <select id="select-filter-mode" class="form-select">
+                  <option value="all" selected>All Modes</option>
+                  <option value="surface">Surface</option>
+                  <option value="air">Air Express</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-2">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text"><i class="bi bi-clock"></i> Days</span>
+                <select id="select-filter-time" class="form-select">
+                  <option value="all" selected>All Speeds</option>
+                  <option value="fast">&le; 2 Business Days</option>
+                  <option value="standard">3 - 5 Business Days</option>
+                  <option value="economy">&gt; 5 Business Days</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-2 text-end">
+              <button type="button" id="btn-reset-filters" class="btn btn-sm btn-outline-secondary w-100">
+                <i class="bi bi-x-circle me-1"></i> Reset
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards View (Default, User-Friendly) -->
+        <div id="results-cards-container">
+          <!-- Injected via results.js -->
+        </div>
+
+        <div class="table-responsive d-none" id="results-table-container">
+          <table class="enterprise-table">
+            <thead>
+              <tr>
+                <th style="min-width: 220px;">Courier Service</th>
+                <th style="width: 130px;">Estimated Delivery</th>
+                <th style="width: 110px;">Transport</th>
+                <th style="width: 110px;" class="text-center">Billed Wt</th>
+                <th style="width: 140px;" class="text-end">Final Total (All Incl.)</th>
+                <th style="width: 140px;" class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="results-table-body"></tbody>
+          </table>
+        </div>
+
+        <div id="results-cards-mobile" class="p-3"></div>
+        <div id="results-empty-state" class="d-none"></div>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-7">
+          <div class="chart-card">
+            <h6 class="fw-bold text-dark mb-1"><i class="bi bi-bar-chart-fill text-primary me-1"></i> Cost Breakdown Chart</h6>
+            <div class="chart-wrapper"><canvas id="chart-cost-breakdown"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="chart-card">
+            <h6 class="fw-bold text-dark mb-1"><i class="bi bi-pie-chart-fill text-accent me-1"></i> Weight Comparison Chart</h6>
+            <div class="chart-wrapper"><canvas id="chart-weight-comparison"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal & Offcanvas Components -->
+  <div class="modal fade" id="priceBreakdownModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-bold text-dark" id="modal-service-title">Shipping Price Breakdown</h5>
+            <span class="text-secondary small" id="modal-service-subtitle"></span>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4" id="modal-breakdown-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="savedQuotesOffcanvas">
+    <div class="offcanvas-header border-bottom bg-light">
+      <h5 class="offcanvas-title fw-bold text-dark"><i class="bi bi-bookmarks text-primary me-2"></i> Saved Estimates</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body p-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-secondary extra-small text-uppercase fw-semibold">Local Storage History</span>
+        <button type="button" id="btn-clear-saved-quotes" class="btn btn-link btn-sm text-danger text-decoration-none p-0">Clear All</button>
+      </div>
+      <div id="saved-quotes-list"></div>
+    </div>
+  </div>
+
+  <footer class="enterprise-footer">
+    <div class="container text-center small text-muted">
+      &copy; 2026 LogiXpress Enterprise Logistics. Built with verified logistics calculation formulas.
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/config.js?v=2"></script>
+  <script src="assets/js/validation.js?v=2"></script>
+  <script src="assets/js/pricing-engine.js?v=2"></script>
+  <script src="assets/js/storage.js?v=2"></script>
+  <script src="assets/js/export.js?v=2"></script>
+  <script src="assets/js/results.js?v=2"></script>
+  <script src="assets/js/calculator.js?v=2"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      LogiCalculator.init();
+      LogiResults.initControls();
+      LogiStorage.triggerQuoteCountUpdate();
+      // Auto trigger initial sample rates on domestic page
+      setTimeout(() => {
+        document.getElementById('btn-calculate-domestic').click();
+      }, 200);
+    });
+  </script>
+</body>
+</html>

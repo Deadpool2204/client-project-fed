@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logistics Knowledge Base &amp; FAQ — LogiXpress Enterprise</title>
+  <meta name="description" content="Commercial shipping guidelines, volumetric weight formulas, GST tax structures, COD terms, and international customs rules.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/components.css" rel="stylesheet">
+  <link href="assets/css/responsive.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <nav class="navbar navbar-expand-lg enterprise-navbar sticky-top">
+      <div class="container">
+        <a class="navbar-brand-logo" href="index.html">
+          <div class="brand-icon-box"><i class="bi bi-box-seam-fill"></i></div>
+          <div class="d-flex flex-column">
+            <span class="lh-1">LogiXpress</span>
+            <span class="brand-badge">Knowledge Desk</span>
+          </div>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#enterpriseNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="enterpriseNav">
+          <ul class="navbar-nav me-auto ms-lg-4 mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="index.html">All Calculators</a></li>
+            <li class="nav-item"><a class="nav-link" href="domestic.html">Domestic Shipping</a></li>
+            <li class="nav-item"><a class="nav-link" href="international.html">International Shipping</a></li>
+            <li class="nav-item"><a class="nav-link" href="cargo.html">Cargo &amp; Bulk</a></li>
+            <li class="nav-item"><a class="nav-link" href="quick-delivery.html">Quick Delivery</a></li>
+            <li class="nav-item"><a class="nav-link active" href="faq.html">Help / FAQ</a></li>
+          </ul>
+
+          <div class="d-flex align-items-center gap-2">
+            <a href="index.html" class="btn btn-primary btn-sm">
+              <i class="bi bi-calculator me-1"></i> Open Calculator
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container py-5">
+    <div class="text-center mb-5">
+      <h1 class="display-6 fw-bold text-dark mb-2">Shipping Help &amp; FAQ</h1>
+      <p class="text-secondary lead fs-6 mx-auto" style="max-width: 700px;">
+        Clear, simple guide to shipping costs, box size calculations, delivery zones, and taxes.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-10">
+
+        <!-- Topic 1: Volumetric vs Actual Weight -->
+        <div class="card border shadow-sm mb-4">
+          <div class="card-header bg-white py-3">
+            <h5 class="fw-bold mb-0 text-dark">
+              <i class="bi bi-box-seam text-primary me-2"></i> 1. Volumetric Weight vs. Actual Weight
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <p class="text-secondary">
+              A light package that takes up a lot of space costs as much to fly or drive as a dense package of the same size. To account for this, the shipping industry uses <strong>Volumetric (Dimensional) Weight</strong> alongside physical <strong>Actual Weight</strong>.
+            </p>
+
+            <div class="table-responsive my-3">
+              <table class="table table-bordered table-sm align-middle small">
+                <thead class="table-light">
+                  <tr>
+                    <th>Service Type</th>
+                    <th>Volumetric Divisor</th>
+                    <th>Formula</th>
+                    <th>1 Cubic Metre (CBM) Equivalent</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="fw-semibold">Standard Courier &amp; Express Air</td>
+                    <td class="font-monospace">5000</td>
+                    <td class="font-monospace">(L &times; W &times; H in cm) / 5000</td>
+                    <td>200 kg</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Commercial Air Cargo (IATA)</td>
+                    <td class="font-monospace">6000</td>
+                    <td class="font-monospace">(L &times; W &times; H in cm) / 6000</td>
+                    <td>167 kg</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Surface Bulk / LTL Freight</td>
+                    <td class="font-monospace">4000 &ndash; 4500</td>
+                    <td class="font-monospace">(L &times; W &times; H in cm) / 4000</td>
+                    <td>250 kg</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="p-3 bg-light rounded border small">
+              <strong>Chargeable Weight Rule:</strong>
+              <code>Chargeable Weight = max(Actual Weight, Volumetric Weight)</code>.
+              Freight rates and additional weight slabs are always calculated against this chargeable weight figure.
+            </div>
+          </div>
+        </div>
+
+        <!-- Topic 2: Domestic Shipping Zones -->
+        <div class="card border shadow-sm mb-4">
+          <div class="card-header bg-white py-3">
+            <h5 class="fw-bold mb-0 text-dark">
+              <i class="bi bi-geo-alt text-primary me-2"></i> 2. Domestic Shipping Zone Structure (India)
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <p class="text-secondary small mb-3">
+              Logistics transit times and base rates are determined by geographic zone matrices based on Indian postal circles:
+            </p>
+            <ul class="list-group list-group-flush small">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>Zone A &mdash; Intra-City (Local)</strong>: Pickup and delivery within the same city or immediate municipal hub.
+                </div>
+                <span class="badge bg-light text-dark border">Transit: 24 - 48h</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>Zone B &mdash; Intra-State / Regional</strong>: Within the same state boundary or adjacent postal circles.
+                </div>
+                <span class="badge bg-light text-dark border">Transit: 2 - 3 Days</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>Zone C &mdash; Metro to Metro</strong>: Between major primary logistics hubs (e.g., Mumbai, Delhi NCR, Bengaluru, Chennai, Kolkata, Hyderabad, Ahmedabad, Pune).
+                </div>
+                <span class="badge bg-light text-dark border">Transit: 1 - 3 Days</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>Zone D &mdash; Rest of India (National)</strong>: Standard inter-state routes between Tier-2 and Tier-3 commercial nodes.
+                </div>
+                <span class="badge bg-light text-dark border">Transit: 4 - 6 Days</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>Zone E &mdash; Special / Remote Regions</strong>: North-East states, Jammu &amp; Kashmir, Ladakh, Andaman &amp; Nicobar, and Lakshadweep.
+                </div>
+                <span class="badge bg-light text-dark border">Transit: 5 - 10 Days</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Topic 3: Cash on Delivery & Returns -->
+        <div class="card border shadow-sm mb-4">
+          <div class="card-header bg-white py-3">
+            <h5 class="fw-bold mb-0 text-dark">
+              <i class="bi bi-cash-coin text-primary me-2"></i> 3. Cash on Delivery (COD) &amp; Reverse Shipping Rules
+            </h5>
+          </div>
+          <div class="card-body p-4 text-secondary small">
+            <h6>Cash on Delivery (COD) Handling Fees</h6>
+            <p>
+              Couriers incur cash collection, audit verification, and digital reconciliation overheads. Under our configured business rules, the COD handling fee is calculated as the higher of:
+            </p>
+            <ul>
+              <li>Flat Minimum Fee: <strong>&#8377;45.00</strong></li>
+              <li>Percentage Fee: <strong>2.0%</strong> of the collected cash amount</li>
+            </ul>
+
+            <h6 class="mt-4">Return to Origin (RTO) Charges</h6>
+            <p>
+              When a package is undelivered after standard delivery attempts (e.g. consignee refused, incorrect address, or consignee unavailable), it is returned to the origin warehouse. RTO carries a freight charge equivalent to 100% of the forward freight rate to cover return transit.
+            </p>
+
+            <h6 class="mt-4">Reverse Pickup / Customer Exchange</h6>
+            <p>
+              Doorstep customer pickups require specialized driver workflows, barcode labeling at pickup, and physical QC verification. Reverse pickups are calculated at <strong>1.25&times;</strong> the standard forward freight rate.
+            </p>
+          </div>
+        </div>
+
+        <!-- Topic 4: Goods & Services Tax (GST) -->
+        <div class="card border shadow-sm mb-4">
+          <div class="card-header bg-white py-3">
+            <h5 class="fw-bold mb-0 text-dark">
+              <i class="bi bi-receipt text-primary me-2"></i> 4. Goods and Services Tax (GST) on Logistics
+            </h5>
+          </div>
+          <div class="card-body p-4 text-secondary small">
+            <p>
+              As per statutory provisions under the Indian Goods and Services Tax regime, courier and freight transport services attract <strong>18% GST</strong> on total billable freight (including fuel surcharge, docket fees, and handling charges).
+            </p>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="p-3 bg-light rounded border">
+                  <strong class="text-dark">Intra-State Shipments (Zone A &amp; B)</strong>
+                  <p class="mb-0 mt-1">Split equally into <strong>9% CGST</strong> (Central GST) and <strong>9% SGST</strong> (State GST).</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 bg-light rounded border">
+                  <strong class="text-dark">Inter-State Shipments (Zone C, D, E &amp; Cargo)</strong>
+                  <p class="mb-0 mt-1">Billed as <strong>18% IGST</strong> (Integrated GST).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Topic 5: International Customs Disclaimer -->
+        <div class="card border shadow-sm mb-4">
+          <div class="card-header bg-white py-3">
+            <h5 class="fw-bold mb-0 text-dark">
+              <i class="bi bi-globe-americas text-primary me-2"></i> 5. Cross-Border Customs, Duties, &amp; Taxes
+            </h5>
+          </div>
+          <div class="card-body p-4 text-secondary small">
+            <div class="alert alert-warning border-warning-subtle text-dark">
+              <i class="bi bi-exclamation-triangle-fill text-warning me-1"></i>
+              <strong>Critical Domain Policy:</strong>
+              International customs duties and destination import taxes are assessed solely by destination national border agencies upon arrival based on the commodity's HS code and declared value. They are <strong>never fabricated</strong> or included in standard freight quotations.
+            </div>
+            <p>
+              Unless a verified commercial contract is signed for Delivered Duty Paid (DDP) clearance, all international parcels are routed under Delivered At Place (DAP / DDU) terms, where duties and local VAT must be settled directly by the consignee prior to final delivery.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="enterprise-footer">
+    <div class="container text-center small text-muted">
+      &copy; 2026 LogiXpress Enterprise Logistics. Logistics Guidance Desk.
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
